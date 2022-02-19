@@ -102,24 +102,24 @@ export default function CreateItem() {
         <div className="flex justify-center">
             <div className="w-1/2 flex flex-col pb-12">
                 <input 
-                    placeholder="Asset Name"
+                    placeholder="Item Name"
                     className="mt-8 border rounded p-4"
                     onChange={e => updateFormInput({...formInput, name: e.target.value})}
                     />
                 <textarea
-                     placeholder="Asset description"
+                     placeholder="Item description"
                      className="mt-2 border rounded p-4"
                      onChange={e => updateFormInput({...formInput, description: e.target.value})}
                      />
                 <input 
-                    placeholder="Asset Price in Eth"
+                    placeholder="Item Price in Eth"
                     className="mt-8 border rounded p-4"
                     type="number"
                     onChange={e => updateFormInput({...formInput, price: e.target.value})}
                     />
                     <input
                         type="file"
-                        name="Asset"
+                        name="Item"
                         className="my-4"
                         onChange={onChange}
                     />
@@ -128,7 +128,7 @@ export default function CreateItem() {
                            
                             <Image
                             src={fileUrl}
-                            alt="Picture of the author"
+                            alt="Picture of the Item"
                             className="rounded mt-4"
                             width={100}
                             height={350} 
@@ -139,7 +139,7 @@ export default function CreateItem() {
                     }
                     <button onClick={createItem}
                      className="font-bold mt-4 bg-blue-700 text-white rounded p-4 shadow-lg"
-                     >Create NFT</button>
+                     >Add Item to Store</button>
             </div>
         </div>
     )
