@@ -52,7 +52,7 @@ export default function MyAssets() {
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets owned</h1>)
   return (
     <div className="flex justify-center">
-      <div className="p-4">
+      <div className="p-4 " style={{ maxWidth: '1400px'}}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {
             nfts.map((nft, i) => (
@@ -63,8 +63,8 @@ export default function MyAssets() {
                             src={nft.image}
                             alt="Picture of the author"
                             className="rounded"
-                            width={350}
-                            height={500} 
+                            width={300}
+                            height={250} 
                             // blurDataURL="data:..." automatically provided
                             // placeholder="blur" // Optional blur-up while loading
                           />
