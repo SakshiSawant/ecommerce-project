@@ -72,11 +72,6 @@ export default function Home() {
 
   return (
     <div className="flex justify-center">
-      <div className="place-content-center justify-center ">
-        <Link href="/create-item">
-            <a className="mr-6 text-blue-800 font-bold justify-center">Create Item</a>
-        </Link>
-      </div>
      <div className="px-4" style={{ maxWidth: '1400px'}}>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-4">
         {
@@ -92,10 +87,10 @@ export default function Home() {
                   // placeholder="blur" // Optional blur-up while loading
                 />
                 <div className="p-4">
-                <p style={{ height: '60px'}} className="text-2xl font-semibold">
+                <p style={{ height: '30px'}} className="text-2xl font-semibold">
                   {nft.name}
                 </p>
-                <div style={{ height: '60px', overflow: 'hidden'}}>
+                <div style={{ height: '40px', overflow: 'hidden'}}>
                   <p className="text-gray-400">{nft.description}</p>
                 </div>
               </div>
@@ -104,7 +99,7 @@ export default function Home() {
                   {nft.price} ETH
                 </p>
                 <button className="w-full bg-blue-700 text-white font-bold py-2 px-12 rounded"
-                onClick={() => buyNFT(nft)}>Buy NFT</button>
+                onClick={() => buyNFT(nft)}>Buy Item</button>
             </div>
             </div>
           ))
