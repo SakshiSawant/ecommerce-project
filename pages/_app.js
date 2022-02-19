@@ -10,9 +10,9 @@ function MyApp({ Component, pageProps }) {
         <Link href="/">
           <a className="mr-4 text-blue-800 font-bold">Home</a>
         </Link>
-        {/* <Link href="/create-item">
+        <Link href="/create-item">
           <a className="mr-6 text-blue-800 font-bold">Create Item</a>
-        </Link> */}
+        </Link>
         <Link href="/my-assets">
           <a className="mr-6 text-blue-800 font-bold">My Items</a>
         </Link>
