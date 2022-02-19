@@ -55,8 +55,8 @@ export default function CreatorDashboard() {
   }
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets created</h1>)
   return (
-    <div className="flex justify-center">
-      <div className="p-4" style={{ maxWidth: '1400px'}}>
+    <div className="flex flex-col justify-center px-5 mx-8" style={{ maxWidth: '1400px'}}>
+      <div className="p-4">
         <h2 className="text-2xl py-2">Items Created</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-4">
           {
@@ -68,7 +68,7 @@ export default function CreatorDashboard() {
                             src={nft.image}
                             alt="Picture of the author"
                             className="rounded"
-                            width={300}
+                            width={350}
                             height={250} 
                             // blurDataURL="data:..." automatically provided
                             // placeholder="blur" // Optional blur-up while loading
@@ -82,7 +82,7 @@ export default function CreatorDashboard() {
           }
         </div>
       </div>
-        <div className="px-4">
+        <div className="p-4">
         {
           Boolean(sold.length) && (
             <div>
