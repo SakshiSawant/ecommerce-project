@@ -75,7 +75,7 @@ export default function CreatorDashboard() {
                           />
 
                 <div className="p-4 bg-black">
-                  <p className="text-2xl font-bold text-white">Price - {nft.price} Eth</p>
+                  <p className="text-2xl font-bold text-white">Price - {nft.price} ETH</p>
                 </div>
               </div>
             ))
@@ -91,7 +91,18 @@ export default function CreatorDashboard() {
                 {
                   sold.map((nft, i) => (
                     <div key={i} className="border shadow rounded-xl overflow-hidden">
-                      <img src={nft.image} className="rounded" />
+                      {/* <img src={nft.image} className="rounded" /> */}
+                      <Image
+                            src={nft.image}
+                            //alt="Picture of the author"
+                            className="rounded"
+                            width={350}
+                            height={250} 
+                            // blurDataURL="data:..." automatically provided
+                            // placeholder="blur" // Optional blur-up while loading
+                          />
+
+
                       <div className="p-4 bg-black">
                         <p className="text-2xl font-bold text-white">Price - {nft.price} Eth</p>
                       </div>
