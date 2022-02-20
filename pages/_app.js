@@ -1,5 +1,7 @@
 import '../styles/globals.css'
 import Link from 'next/link'
+import logo from '../public/logo.jpeg'
+import Image from 'next/image'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -22,27 +24,34 @@ function MyApp({ Component, pageProps }) {
       </nav>  */}
 
 
-<nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+<nav class="flex items-center justify-between flex-wrap bg-blue-800 p-6">
   <div class="flex items-center flex-shrink-0 text-white mr-6">
-    {/* <!-- Image --> */}
-    <span class="font-semibold text-xl tracking-tight">Helping Hands</span>
+          {/* <!-- Image --> */}
+          <Image
+            src={logo}
+            alt="Picture of the Item"
+            className="rounded mt-4"
+            width={50}
+            height={50} 
+          />
+    {/* <span class="font-semibold text-xl tracking-tight">Helping Hands</span> */}
   </div>
  
   <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
     <div class="text-sm lg:flex-grow">
-      <a href="/" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+      <a href="/" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
         Home
       </a>
-      <a href="/create-item" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+      <a href="/create-item" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
         Create Item
       </a>
-      <a href="/my-assets" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+      <a href="/my-assets" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
         MyItem
       </a>
-      <a href="/creator-dashboard" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+      <a href="/creator-dashboard" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
         Dashboard
       </a>
-      <a href="/transaction" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+      <a href="/transaction" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
         My Transactions
       </a>
     </div>
