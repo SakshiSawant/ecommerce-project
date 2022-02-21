@@ -3,7 +3,7 @@ export const nftmarketaddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3' ;
 // export const causeaddress = "";
 // export const thecrowdchainaddress = "";
 //EDIT !!!
-let x = 1;
+let x = 2;
 //change the above everytime you redeploy your contracts
 
 //command for deploying your contracts on hardhat:
