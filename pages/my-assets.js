@@ -68,7 +68,7 @@ export default function MyAssets() {
                             // blurDataURL="data:..." automatically provided
                             // placeholder="blur" // Optional blur-up while loading
                           />
-                <div className="p-4 bg-black">
+                <div className="p-4 bg-blue-800">
                   <p className="text-2xl font-bold text-white">Price - {nft.price} ETH</p>
                 </div>
               </div>

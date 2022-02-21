@@ -74,7 +74,7 @@ export default function CreatorDashboard() {
                             // placeholder="blur" // Optional blur-up while loading
                           />
 
-                <div className="p-4 bg-black">
+                <div className="p-4 bg-blue-800">
                   <p className="text-2xl font-bold text-white">Price - {nft.price} ETH</p>
                 </div>
               </div>
@@ -103,7 +103,7 @@ export default function CreatorDashboard() {
                           />
 
 
-                      <div className="p-4 bg-black">
+                      <div className="p-4 bg-blue-800">
                         <p className="text-2xl font-bold text-white">Price - {nft.price} Eth</p>
                       </div>
                     </div>
