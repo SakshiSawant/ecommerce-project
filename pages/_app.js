@@ -6,24 +6,6 @@ import Image from 'next/image'
 function MyApp({ Component, pageProps }) {
   return (
     <div>
-      {/* <nav className="border-b p-6">
-        <p className="text-4xl font-bold">Charity Store</p>
-        <div className="flex mt-4"></div>
-        <Link href="/">
-          <a className="mr-4 text-blue-800 font-bold">Home</a>
-        </Link>
-        <Link href="/create-item">
-          <a className="mr-6 text-blue-800 font-bold">Create Item</a>
-        </Link>
-        <Link href="/my-assets">
-          <a className="mr-6 text-blue-800 font-bold">My Items</a>
-        </Link>
-        <Link href="/creator-dashboard">
-          <a className="mr-6 text-blue-800 font-bold">Dashboard</a>
-        </Link>
-      </nav>  */}
-
-
 <nav class="flex items-center justify-between flex-wrap bg-sky-500 p-6">
   <div class="flex items-center flex-shrink-0 text-white mr-6">
           {/* <!-- Image --> */}
@@ -48,6 +30,14 @@ function MyApp({ Component, pageProps }) {
       <a href="/my-assets" class="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
         MyItem
       </a>
+      <a href="/create-cause" class="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+        Create Cause
+      </a>
+      <a href="/allcause" class="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+        All Cause
+      </a>
+
+
       <a href="/creator-dashboard" class="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
         Dashboard
       </a>
@@ -60,10 +50,6 @@ function MyApp({ Component, pageProps }) {
     </div>
   </div>
 </nav>
-
-
-
-
 
       <Component {...pageProps} />
     </div>

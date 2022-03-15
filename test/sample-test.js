@@ -12,17 +12,7 @@ describe("NFTMarket", function () {
     const nft = await NFT.deploy(marketAddress);
     await nft.deployed(); //deploy the NFT contract
     const nftContractAddress = nft.address;
-
-    const Cause = await ethers.getContractFactory("Cause");
-    const cause = await Cause.deploy(marketAddress);
-    await cause.deployed(); //deploy the NFT contract
-    const causeAddress = cause.address;
-
-    const TheCrowdChain = await ethers.getContractFactory("TheCrowdChain");
-    const theCrowdChain = await TheCrowdChain.deploy(marketAddress);
-    await theCrowdChain.deployed(); //deploy the NFT contract
-    const theCrowdChainAddress = theCrowdChain.address;
-
+    
     //get the listing price
     let listingPrice = await market.getListingPrice();
     listingPrice = listingPrice.toString();
