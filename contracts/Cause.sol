@@ -1,112 +1,39 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
-// Importing OpenZeppelin's SafeMath Implementation
-// import "https://github.com/OpenZeppelin/openzeppelin-solidity/contracts/utils/math/SafeMath.sol";
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
-contract Cause {
-    using SafeMath for uint256;
 
-    //charity cause current status
-    enum State {
-        pending,
-        completed
-    }
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 
-    address payable public creator;
-    uint256 public goal;
-    uint256 public current;
-    string public title;
-    string public cause_type;
-    string public description;
+contract Cause is ERC721URIStorage {
+    //auto-increment field for each token
+    using Counters for Counters.Counter;
 
-    State public state = State.pending;
-    mapping(address => uint256) public donors;
+    Counters.Counter private _tokenIds;
 
-    //event when ever funding or donation is received
-    event donationReceived(address donor, uint256 amount, uint256 current);
+    //address of the NFT market place
 
-    //event when donation is completed and amount is dispatched
-    event donationSentToTarget(address recipient);
+    address contractAddress;
 
-    //check the current state via modifier
-    modifier checkState(State state_) {
-        require(state == state_);
-        _;
-    }
-
-    //check if caller is creator
-    modifier isCreator() {
-        require(msg.sender == creator);
-        _;
-    }
-
-    constructor(
-        address payable c_starter,
-        string memory c_title,
-        string memory c_type,
-        string memory c_description,
-        uint256 c_goal
-    ) {
-        creator = c_starter;
-        title = c_title;
-        cause_type = c_type;
-        description = c_description;
-        goal = c_goal;
-        current = 0;
-    }
-
-    /* Function to contribute/donate to cause*/
-    function donate() external payable checkState(State.pending) {
-        require(msg.sender != creator);
-        donors[msg.sender] = donors[msg.sender].add(msg.value);
-        current = current.add(msg.value);
-        //emit donationReceived event
-        emit donationReceived(msg.sender, msg.value, current);
-        //check if donation is completed
-        checkIfDonationCompleted();
-    }
-
-    function checkIfDonationCompleted() public {
-        if (current >= goal) {
-            state = State.completed;
-            payToTarget();
-        }
-    }
-
-    function payToTarget() internal checkState(State.completed) returns (bool) {
-        uint256 raised = current;
-        current = 0;
-
-        if (creator.send(raised)) {
-            emit donationSentToTarget(creator);
-            return true;
-        } else {
-            current = raised;
-            state = State.completed;
-        }
-        return false;
-    }
-
-    function get()
-        public
-        view
-        returns (
-            address payable c_starter,
-            string memory c_title,
-            string memory c_type,
-            string memory c_description,
-            State currentState,
-            uint256 c_goal,
-            uint256 c_raised
-        )
+    constructor(address allcauseAddress)
+        ERC721("Partnerverse Tokens", "PNVT")
     {
-        c_starter = creator;
-        c_title = title;
-        c_type = cause_type;
-        currentState = state;
-        c_description = description;
-        c_goal = goal;
-        c_raised = current;
+        contractAddress = allcauseAddress;
+    }
+
+    /// @notice create a new token
+    /// @param tokenURI : token URI
+    function createToken(string memory tokenURI) public returns (uint256) {
+        //set a new token id for the token to be minted
+        _tokenIds.increment();
+        uint256 newCauseId = _tokenIds.current();
+
+        _mint(msg.sender, newCauseId); //mint the token
+        _setTokenURI(newCauseId, tokenURI); //generate the URI
+        setApprovalForAll(contractAddress, true); //grant transaction permission to marketplace
+
+        //return token ID
+        return newCauseId;
     }
 }

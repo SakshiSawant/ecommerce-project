@@ -24,13 +24,13 @@ async function main() {
   await nft.deployed();
   console.log("NFT deployed to:", nft.address);
 
-  const TheCrowdChain = await hre.ethers.getContractFactory("TheCrowdChain");
-  const theCrowdChain = await TheCrowdChain.deploy();
-  await theCrowdChain.deployed();
-  console.log("TheCrowdChain Cause deployed to:", theCrowdChain.address);
+  const AllCause = await hre.ethers.getContractFactory("AllCause");
+  const allCause = await AllCause.deploy();
+  await allCause.deployed();
+  console.log("AllCause Cause deployed to:", allCause.address);
   
   const Cause = await hre.ethers.getContractFactory("Cause");
-  const cause = await Cause.deploy(nftMarket.address,"","","",1);
+  const cause = await Cause.deploy(allCause.address);
   await cause.deployed();
   console.log("Cause deployed to:", cause.address);
   

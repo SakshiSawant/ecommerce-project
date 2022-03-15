@@ -198,4 +198,58 @@ contract NFTMarket is ReentrancyGuard {
         }
         return items;
     }
+
+
+    //  /// @notice function to create cause item
+    // function createCauseItem(
+    //     address nftContract,
+    //     uint256 tokenId,
+    //     uint256 amount
+    // ) public payable nonReentrant {
+    //     require(amount > 0, "Price must be above zero");
+    //     require(
+    //         msg.value == listingPrice,
+    //         "Price must be equal to listing price"
+    //     );
+
+    //     _causeIds.increment(); //add 1 to the total number of causes ever created
+    //     uint256 causeId = _causeIds.current();
+
+    //     idCauseItem[causeId] = CauseItem(
+    //         causeId,
+    //         nftContract,
+    //         tokenId,
+    //         payable(msg.sender), //address of the seller putting the nft up for sale
+    //         payable(address(0)), //no owner yet (set owner to empty address)
+    //         amount,
+    //         false
+    //     );
+
+    //     //transfer ownership of the nft to the contract itself
+    //     IERC721(nftContract).transferFrom(msg.sender, address(this), tokenId);
+
+    //     //log this transaction
+    //     emit MarketItemCreated(
+    //         itemId,
+    //         nftContract,
+    //         tokenId,
+    //         msg.sender,
+    //         address(0),
+    //         price,
+    //         false
+    //     );
+    // }
+
+    //   /// @notice function to donate for a cause
+    // function makeDonation(address nftContract, uint256 causeId) public payable nonReentrant
+    // {
+    //     uint256 amount = idCauseItem[causeId].amount;
+    //     uint256 tokenId = idMarketItem[itemId].tokenId;
+
+
+    //     //Incomplete....
+
+    // }
+
+
 }
