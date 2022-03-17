@@ -77,7 +77,7 @@ export default function Home() {
 
     //make the sale
     const transaction = await contract.createCauseDonate(causeaddress, temp, {
-      value: listingPrice
+      value: temp
     });
     await transaction.wait();
 
@@ -117,9 +117,13 @@ export default function Home() {
                     {cause.goal} ETH
                   </p>
 
+                  <p className="text-xl mb-4 text-white">
+                  Amount Collected : 0 {cause.amount} ETH
+                  </p>
+
                   <input
                     placeholder="Enter Amount to Donate"
-                    className="mt-8 border rounded p-4"
+                    className="w-full mt-4 mb-4 border rounded p-4"
                     type="number"
                     onChange={e => updateFormInput({ ...formInput, amount: e.target.value })}
                   />
