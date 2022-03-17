@@ -1,3 +1,5 @@
+// Dashboard for the users to view their items created and items sold
+
 import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'

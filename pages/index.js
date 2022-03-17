@@ -1,4 +1,6 @@
-import {ethers} from 'ethers';
+// Page for buying items
+
+import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Web3Modal from "web3modal"

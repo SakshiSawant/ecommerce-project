@@ -1,3 +1,5 @@
+// Page where the user will be able to view all the beneficiary projects available
+
 import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import axios from 'axios';

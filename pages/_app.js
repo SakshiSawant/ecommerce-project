@@ -1,3 +1,5 @@
+// Main page for navigation bar
+
 import '../styles/globals.css'
 import Link from 'next/link'
 import logo from '../public/logo.jpeg'

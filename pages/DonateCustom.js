@@ -1,3 +1,5 @@
+// Page to donate amount to cause
+
 // import dynamic from "next/dynamic";
 import {ethers} from 'ethers';
 import { useEffect, useState } from 'react';
