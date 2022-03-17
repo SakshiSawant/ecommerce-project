@@ -1,4 +1,5 @@
 // Main page for navigation bar
+// _app.js = itemnav.js
 
 import '../styles/globals.css'
 import Link from 'next/link'

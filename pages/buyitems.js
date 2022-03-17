@@ -1,4 +1,5 @@
 // Page for buying items
+// index.js = buyitems.js
 
 import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
