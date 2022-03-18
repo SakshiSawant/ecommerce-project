@@ -42,6 +42,9 @@ const PosterInner = ({ user }) => {
   );
 
   return (
+
+    <div>
+      <h3 className={styles.heading}>Hello, {user.username}</h3>
     <form onSubmit={onSubmit}>
       <Container className={styles.poster}>
         <Avatar size={40} username={user.username} url={user.profilePicture} />
@@ -56,6 +59,7 @@ const PosterInner = ({ user }) => {
         </Button>
       </Container>
     </form>
+    </div>
   );
 };
 
