@@ -21,7 +21,7 @@ const Login = () => {
   const router = useRouter();
   useEffect(() => {
     if (isValidating) return;
-    if (user) router.replace('/create-cause');
+    if (user) router.replace('/shopDashboard');
   }, [user, router, isValidating]);
 
   const onSubmit = useCallback(
