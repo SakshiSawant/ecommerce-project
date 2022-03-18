@@ -50,7 +50,7 @@ const SignUp = () => {
         });
         mutate({ user: response.user }, false);
         toast.success('Your account has been created');
-        router.replace('/cooperativeDashboard');
+        router.replace('/allcause');
       } catch (e) {
         toast.error(e.message);
       } finally {
