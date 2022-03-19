@@ -18,7 +18,10 @@ const FeedPage = () => {
                     </a>
 
                     <a href="/creator-dashboard" class="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">Dashboard</a>
-                </div>
+                <a href="/allcause" class="block mt-4 lg:inline-block text-lg lg:mt-0 text-white hover:text-white mr-4">
+                        Causes
+                    </a>
+        </div>
             </nav>
       <Feed />
     </>

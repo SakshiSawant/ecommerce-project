@@ -50,7 +50,7 @@ const SignUp = () => {
         });
         mutate({ user: response.user }, false);
         toast.success('Your account has been created');
-        router.replace('/feed');
+        router.replace('/Shop');
       } catch (e) {
         toast.error(e.message);
       } finally {
