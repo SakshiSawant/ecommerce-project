@@ -96,7 +96,7 @@ export default function CreateItem() {
 
         await transaction.wait()
 
-        router.push('/')
+        router.push('/buyitems')
 
     }
 
