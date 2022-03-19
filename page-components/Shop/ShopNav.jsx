@@ -1,4 +1,6 @@
+import { Button } from '@/components/Button';
 import { Text, TextLink } from '@/components/Text';
+import Spacer from '@/components/Layout/Spacer';
 import Link from 'next/link';
 
 
@@ -6,21 +8,15 @@ const ShopNav = () => {
     return(
         <div>
             <Link href="/create-item" passHref>
-                <TextLink color="link" variant="highlight">
-                    Create Item
-                </TextLink>
+                <Button type="success">Create Item</Button>
             </Link>
 
             <Link href="/my-assets" passHref>
-                <TextLink color="link" variant="highlight">
-                    Assets
-                </TextLink>
+                <Button type="success">Assets</Button>
             </Link>
-
+            <Spacer axis="horizontal" size={0.25} />
             <Link href="/creator-dashboard" passHref>
-                <TextLink color="link" variant="highlight">
-                    Dashboard
-                </TextLink>
+                <Button type="success">Dashboard</Button>
             </Link>
         </div>
     )
