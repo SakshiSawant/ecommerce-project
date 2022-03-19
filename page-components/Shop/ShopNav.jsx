@@ -21,11 +21,17 @@ const ShopNav = () => {
                 </TextLink>
             </Link>
 
-            {/* <Link href="/create-item" passHref>
+            <Link href="/my-assets" passHref>
                 <TextLink color="link" variant="highlight">
-                    
+                    Assets
                 </TextLink>
-            </Link> */}
+            </Link>
+
+            <Link href="/creator-dashboard" passHref>
+                <TextLink color="link" variant="highlight">
+                    Dashboard
+                </TextLink>
+            </Link>
         </div>
     )
 }
