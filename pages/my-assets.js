@@ -52,7 +52,9 @@ export default function MyAssets() {
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets owned</h1>)
   return (
     <div className="flex justify-center">
-      <div className="p-4 " style={{ maxWidth: '1400px'}}>
+      <div className="p-4 " style={{ maxWidth: '1400px' }}>
+        <div className="p-4">
+        <h2 className="text-2xl py-2">Items Bought</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {
             nfts.map((nft, i) => (
@@ -75,7 +77,8 @@ export default function MyAssets() {
             ))
           }
         </div>
-      </div>
+        </div>
+        </div>
     </div>
   )
 }
