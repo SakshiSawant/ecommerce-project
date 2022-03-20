@@ -16,6 +16,16 @@ const UserMenu = ({ user, mutate }) => {
   const menuRef = useRef();
   const avatarRef = useRef();
 
+  const account_type = user.accounttype;
+  console.log(account_type);
+
+  let create;
+ 
+  if (account_type == 'cooperativeshop')
+    create = 'create-item';
+  else if (account_type == 'beneficiary')
+    create = 'create-cause';
+
   const [visible, setVisible] = useState(false);
 
   const router = useRouter();
@@ -74,7 +84,10 @@ const UserMenu = ({ user, mutate }) => {
             <Link passHref href={`/user/${user.username}`}>
               <a className={styles.item}>Profile</a>
             </Link>
-            <Link passHref href="/create-item">
+            <Link passHref href={`/user/${user.username}`}>
+              <a className={styles.item}>{account_type}</a>
+            </Link>
+            <Link passHref href={`/${create}`}>
               <a className={styles.item}>Create Item</a>
             </Link>
             <Link passHref href="/my-assets">
@@ -150,3 +163,9 @@ const Nav = () => {
 };
 
 export default Nav;
+
+
+
+// Shop == createItem,Dashboard(Items created, Items sold)
+// Beneficiary == createCause, Dashboard(Cause Created, Cause completed),buyItems
+// Donor == ViewCauses(allcauses)
