@@ -79,7 +79,9 @@ const UserMenu = ({ user, mutate }) => {
         aria-hidden={visible}
         className={styles.popover}
       >
-        {visible && (
+
+        {/* If user is the beneficiary */}
+        {visible && account_type === 'beneficiary' && (
           <div className={styles.menu}>
             <Link passHref href={`/user/${user.username}`}>
               <a className={styles.item}>Profile</a>
@@ -111,6 +113,69 @@ const UserMenu = ({ user, mutate }) => {
             </button>
           </div>
         )}
+
+        {/* If user is the donor */}
+        {visible && account_type === 'donor' && (
+          <div className={styles.menu}>
+            <Link passHref href={`/user/${user.username}`}>
+              <a className={styles.item}>Profile</a>
+            </Link>
+            <Link passHref href={`/user/${user.username}`}>
+              <a className={styles.item}>{account_type}</a>
+            </Link>
+            <Link passHref href="/allcause">
+              <a className={styles.item}>View Causes</a>
+            </Link>
+            <Link passHref href="/settings">
+              <a className={styles.item}>Settings</a>
+            </Link>
+            <div className={styles.item} style={{ cursor: 'auto' }}>
+              <Container alignItems="center">
+                <span>Theme</span>
+                <Spacer size={0.5} axis="horizontal" />
+                <ThemeSwitcher />
+              </Container>
+            </div>
+            <button onClick={onSignOut} className={styles.item}>
+              Sign out
+            </button>
+          </div>
+        )}
+
+        {/* If user is the cooperativeshop */}
+        {visible && account_type === 'cooperativeshop' && (
+          <div className={styles.menu}>
+            <Link passHref href={`/user/${user.username}`}>
+              <a className={styles.item}>Profile</a>
+            </Link>
+            <Link passHref href={`/user/${user.username}`}>
+              <a className={styles.item}>{account_type}</a>
+            </Link>
+            <Link passHref href={`/create-item`}>
+              <a className={styles.item}>Create Item</a>
+            </Link>
+            <Link passHref href="/my-assets">
+              <a className={styles.item}>Assets</a>
+            </Link>
+            <Link passHref href="/creator-dashboard">
+              <a className={styles.item}>Dashboard</a>
+            </Link>
+            <Link passHref href="/settings">
+              <a className={styles.item}>Settings</a>
+            </Link>
+            <div className={styles.item} style={{ cursor: 'auto' }}>
+              <Container alignItems="center">
+                <span>Theme</span>
+                <Spacer size={0.5} axis="horizontal" />
+                <ThemeSwitcher />
+              </Container>
+            </div>
+            <button onClick={onSignOut} className={styles.item}>
+              Sign out
+            </button>
+          </div>
+        )}
+
       </div>
     </div>
   );
@@ -166,6 +231,21 @@ export default Nav;
 
 
 
-// Shop == createItem,Dashboard(Items created, Items sold)
+// Shop == createItem,Dashboard(Items created, Items sold), Assets
 // Beneficiary == createCause, Dashboard(Cause Created, Cause completed),buyItems
 // Donor == ViewCauses(allcauses)
+
+/*
+1. Shop = 1. Create Item
+          2. Assets
+          3. Dashboard
+2. Beneficiary = 1. Create Cause
+                 2. Buy Items
+                 3. Dashboard
+3. Donor = 1. View Causes
+
+const accountType = {
+
+}
+
+*/
