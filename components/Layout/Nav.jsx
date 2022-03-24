@@ -17,14 +17,14 @@ const UserMenu = ({ user, mutate }) => {
   const avatarRef = useRef();
 
   const account_type = user.accounttype;
-  console.log(account_type);
+  // console.log(account_type);
 
   let create;
  
-  if (account_type == 'cooperativeshop')
-    create = 'create-item';
-  else if (account_type == 'beneficiary')
-    create = 'create-cause';
+  // if (account_type == 'cooperativeshop')
+  //   create = 'create-item';
+  // else if (account_type == 'beneficiary')
+  //   create = 'create-cause';
 
   const [visible, setVisible] = useState(false);
 
@@ -89,15 +89,22 @@ const UserMenu = ({ user, mutate }) => {
             <Link passHref href={`/user/${user.username}`}>
               <a className={styles.item}>{account_type}</a>
             </Link>
-            <Link passHref href={`/${create}`}>
-              <a className={styles.item}>Create Item</a>
+            <Link passHref href={`/create-cause`}>
+              <a className={styles.item}>Create Cause</a>
+            </Link>
+
+            {/* Later uncomment */}
+            {/* <Link passHref href={`/mycauses`}>
+              <a className={styles.item}>My Cause</a>
+            </Link> */}
+
+            <Link passHref href="/buyitems">
+              <a className={styles.item}>Buy Items</a>
             </Link>
             <Link passHref href="/my-assets">
-              <a className={styles.item}>Assets</a>
+              <a className={styles.item}>My Items</a>
             </Link>
-            <Link passHref href="/creator-dashboard">
-              <a className={styles.item}>Dashboard</a>
-            </Link>
+            
             <Link passHref href="/settings">
               <a className={styles.item}>Settings</a>
             </Link>
@@ -124,8 +131,13 @@ const UserMenu = ({ user, mutate }) => {
               <a className={styles.item}>{account_type}</a>
             </Link>
             <Link passHref href="/allcause">
-              <a className={styles.item}>View Causes</a>
+              <a className={styles.item}>Donate for Cause</a>
             </Link>
+
+            {/* <Link passHref href="/mytransaction">
+              <a className={styles.item}>My Transaction</a>
+            </Link> */}
+
             <Link passHref href="/settings">
               <a className={styles.item}>Settings</a>
             </Link>
@@ -151,14 +163,15 @@ const UserMenu = ({ user, mutate }) => {
             <Link passHref href={`/user/${user.username}`}>
               <a className={styles.item}>{account_type}</a>
             </Link>
+            
             <Link passHref href={`/create-item`}>
               <a className={styles.item}>Create Item</a>
             </Link>
-            <Link passHref href="/my-assets">
-              <a className={styles.item}>Assets</a>
-            </Link>
             <Link passHref href="/creator-dashboard">
               <a className={styles.item}>Dashboard</a>
+            </Link>
+            <Link passHref href="/my-assets">
+              <a className={styles.item}>My Assets</a>
             </Link>
             <Link passHref href="/settings">
               <a className={styles.item}>Settings</a>
