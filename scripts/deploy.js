@@ -24,6 +24,12 @@ async function main() {
   await nft.deployed();
   console.log("NFT deployed to:", nft.address);
 
+  const CrowdFund = await hre.ethers.getContractFactory("NFTMarket");
+  const crowdfund = await CrowdFund.deploy();
+  await crowdfund.deployed();
+  console.log("CrowdFund deployed to:", crowdfund.address);
+
+
   const AllCause = await hre.ethers.getContractFactory("AllCause");
   const allCause = await AllCause.deploy();
   await allCause.deployed();

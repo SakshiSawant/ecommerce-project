@@ -1,0 +1,10 @@
+.title {
+  font-size: 8rem;
+  text-align: center;
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 24px 0 64px;
+}
+.root {
+  min-height: calc(100vh);
+}

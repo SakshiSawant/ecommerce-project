@@ -21,7 +21,7 @@ const Login = () => {
   const router = useRouter();
   useEffect(() => {
     if (isValidating) return;
-    if (user) router.replace('/cooperativeDashboard');
+    if (user) router.replace('/CoopDashboard');
   }, [user, router, isValidating]);
 
   const onSubmit = useCallback(
