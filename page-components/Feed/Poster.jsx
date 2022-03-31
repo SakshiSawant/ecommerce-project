@@ -42,7 +42,10 @@ const PosterInner = ({ user }) => {
   );
 
   return (
-    <form onSubmit={onSubmit}>
+
+    <div>
+      <h1 className={styles.heading}>Hello, {user.username}</h1>
+    {/* <form onSubmit={onSubmit}>
       <Container className={styles.poster}>
         <Avatar size={40} username={user.username} url={user.profilePicture} />
         <Input
@@ -55,7 +58,8 @@ const PosterInner = ({ user }) => {
           Post
         </Button>
       </Container>
-    </form>
+    </form> */}
+    </div>
   );
 };
 
@@ -66,7 +70,7 @@ const Poster = () => {
   return (
     <Wrapper>
       <div className={styles.root}>
-        <h3 className={styles.heading}>Share your thoughts</h3>
+        {/* <h3 className={styles.heading}>Share your thoughts</h3> */}
         {loading ? (
           <LoadingDots>Loading</LoadingDots>
         ) : data?.user ? (
@@ -88,3 +92,7 @@ const Poster = () => {
 };
 
 export default Poster;
+
+
+
+

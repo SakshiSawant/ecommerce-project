@@ -8,7 +8,7 @@ export const Feed = () => {
     <div className={styles.root}>
       <Spacer size={1} axis="vertical" />
       <Poster />
-      <PostList />
+      {/* <PostList /> */}
     </div>
   );
 };

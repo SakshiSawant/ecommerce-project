@@ -96,11 +96,12 @@ export default function CreateItem() {
 
         await transaction.wait()
 
-        router.push('/')
+        router.push('/buyitems')
 
     }
 
     return (
+        
         <div className="flex justify-center">
             <div className="w-1/2 flex flex-col pb-12">
                 <input 

@@ -9,7 +9,7 @@ import Image from 'next/image'
 function MyApp({ Component, pageProps }) {
   return (
     <div>
-<nav class="flex items-center justify-between flex-wrap bg-sky-500 p-6">
+      <nav class="flex items-center justify-between flex-wrap bg-sky-500 p-6">
   <div class="flex items-center flex-shrink-0 text-white mr-6">
           {/* <!-- Image --> */}
           <Image
@@ -61,5 +61,7 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp
+
+
 
 
