@@ -8,60 +8,51 @@ import Web3Modal from 'web3modal'
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
 
-import { causeaddress , allcausesaddress } from '../config';
+import { causeaddress , crowdchainaddress } from '../config';
 import Cause from '../artifacts/contracts/Cause.sol/Cause.json';
-import AllCause from '../artifacts/contracts/AllCause.sol/AllCause.json';
+import TheCrowdChain from '../artifacts/contracts/TheCrowdChain.sol/TheCrowdChain.json';
 import { EtherscanProvider } from '@ethersproject/providers'
 import Image from 'next/Image'
 
 
 export default function CreateCause() {
-    const [fileUrl, setFileUrl] = useState(null)
-    const [formInput, updateFormInput] = useState({goal: '', name: '', description:''})
+    // const [fileUrl, setFileUrl] = useState(null)
+    const [formInput, updateFormInput] = useState({goal: '', title: '', c_type: '', description:''})
     const router = useRouter();
 
-    async function onChange(e) {
-        const file = e.target.files[0]
-        try{ //try uploading the file
-            const added = await client.add(
-                file,
-                {
-                    progress: (prog) => console.log(`received: ${prog}`)
-                }
-            )
-            //file saved in the url path below
-            const url = `https://ipfs.infura.io/ipfs/${added.path}`
-            setFileUrl(url)
-        }catch(e){
-            console.log('Error uploading file: ', e)
-        }
-    }
+    // async function onChange(e) {
+    //     const file = e.target.files[0]
+    //     try{ //try uploading the file
+    //         const added = await client.add(
+    //             file,
+    //             {
+    //                 progress: (prog) => console.log(`received: ${prog}`)
+    //             }
+    //         )
+    //         //file saved in the url path below
+    //         const url = `https://ipfs.infura.io/ipfs/${added.path}`
+    //         setFileUrl(url)
+    //     }catch(e){
+    //         console.log('Error uploading file: ', e)
+    //     }
+    // }
 
     //1. create item (image/video) and upload to ipfs
     async function createCause(){
-        const {name, description, goal} = formInput; //get the value from the form input
+        let {title, c_type, description, goal} = formInput; //get the value from the form input
         
         //form validation
-        if(!name || !description || !goal || !fileUrl) {
+        if(!title || !c_type || !description || !goal ) {
             return
         }
 
         const data = JSON.stringify({
-            name, description, image: fileUrl
+            title, c_type, description
         });
 
-        try{
-            const added = await client.add(data)
-            const url = `https://ipfs.infura.io/ipfs/${added.path}`
-            //pass the url to sav eit on Polygon adter it has been uploaded to IPFS
-            createProject(url)
-        }catch(error){
-            console.log(`Error uploading file: `, error)
-        }
-    }
+        console.log("Form data: ", data);
+        //createProject();
 
-    //2. List item for sale
-    async function createProject(url){
         const web3Modal = new Web3Modal();
         const connection = await web3Modal.connect();
         const provider = new ethers.providers.Web3Provider(connection);
@@ -69,30 +60,68 @@ export default function CreateCause() {
         //sign the transaction
         const signer = provider.getSigner();
         let contract = new ethers.Contract(causeaddress, Cause.abi, signer);
-        let transaction = await contract.createToken(url);
-        let tx = await transaction.wait()
+
+        goal = ethers.utils.parseUnits(formInput.goal, 'ether')
+
+        contract = new ethers.Contract(crowdchainaddress, TheCrowdChain.abi, signer);
+
+        let transaction = await contract.startCause(
+            title, c_type, description, goal 
+        )
+
+        await transaction.wait()
+        router.push('/allcause') 
+
+
+
+
+
+
+
+        // try{
+        //     const added = await client.add(data)
+        //     const url = `https://ipfs.infura.io/ipfs/${added.path}`
+        //     //pass the url to sav eit on Polygon adter it has been uploaded to IPFS
+        //     createProject(url)
+        // }catch(error){
+        //     console.log(`Error uploading file: `, error)
+        // }
+    }
+
+    //2. List item for sale
+    async function createProject(){
+        const web3Modal = new Web3Modal();
+        const connection = await web3Modal.connect();
+        const provider = new ethers.providers.Web3Provider(connection);
+
+        //sign the transaction
+        const signer = provider.getSigner();
+        let contract = new ethers.Contract(causeaddress, Cause.abi, signer);
+
+        // let transaction = await contract.createToken(url);
+        // let tx = await transaction.wait()
 
         //get the tokenId from the transaction that occured above
         //there events array that is returned, the first item from that event
         //is the event, third item is the token id.
-        console.log('Transaction: ',tx)
-        console.log('Transaction events: ',tx.events[0])
-        let event = tx.events[0]
-        let value = event.args[2]
-        let tokenId = value.toNumber() //we need to convert it a number
+        // console.log('Transaction: ',tx)
+        // console.log('Transaction events: ',tx.events[0])
+        // let event = tx.events[0]
+        // let value = event.args[2]
+        // let tokenId = value.toNumber() //we need to convert it a number
 
         //get a reference to the price entered in the form 
         const goal = ethers.utils.parseUnits(formInput.goal, 'ether')
 
-        contract = new ethers.Contract(allcausesaddress, AllCause.abi, signer);
+        contract = new ethers.Contract(crowdchainaddress, TheCrowdChain.abi, signer);
 
         //get the listing price
-        let listingPrice = await contract.getListingPrice()
-        listingPrice = listingPrice.toString()
+        // let listingPrice = await contract.getListingPrice()
+        // listingPrice = listingPrice.toString()
 
-        const amount =0;
-        transaction = await contract.createCauseItem(
-            causeaddress, tokenId, amount, goal, {value: listingPrice }
+        //const amount =0;
+        transaction = await contract.startCause(
+            title, c_type, description, goal, 
         )
 
         await transaction.wait()
@@ -107,8 +136,14 @@ export default function CreateCause() {
                 <input 
                     placeholder="Cause Name"
                     className="mt-8 border rounded p-4"
-                    onChange={e => updateFormInput({...formInput, name: e.target.value})}
+                    onChange={e => updateFormInput({...formInput, title: e.target.value})}
                     />
+
+                <input 
+                    placeholder="Cause Type"
+                    className="mt-8 border rounded p-4"
+                    onChange={e => updateFormInput({...formInput, c_type: e.target.value})}
+                    />    
                 <textarea
                      placeholder="Cause description"
                      className="mt-2 border rounded p-4"
@@ -120,7 +155,7 @@ export default function CreateCause() {
                     type="number"
                     onChange={e => updateFormInput({...formInput, goal: e.target.value})}
                     />
-                    <input
+                    {/* <input
                         type="file"
                         name="Cause"
                         className="my-4"
@@ -139,7 +174,7 @@ export default function CreateCause() {
                             // placeholder="blur" // Optional blur-up while loading
                           />
                         )
-                    }
+                    } */}
                     <button onClick={createCause}
                      className="font-bold mt-4 bg-blue-700 text-white rounded p-4 shadow-lg"
                      >Add Cause to Dashboard</button>

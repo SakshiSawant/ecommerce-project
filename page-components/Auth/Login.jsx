@@ -51,8 +51,9 @@ const Login = () => {
   return (
     <Wrapper className={styles.root}>
       <div className={styles.main}>
-        <h1 className={styles.title}>Login to App</h1>
+        <h1 className={styles.title}>Login</h1>
         <form onSubmit={onSubmit}>
+        <Spacer size={0.7} axis="vertical" />
           <Input
             ref={emailRef}
             htmlType="email"
@@ -82,21 +83,23 @@ const Login = () => {
           >
             Log in
           </Button>
-          <Spacer size={0.25} axis="vertical" />
-          <Link href="/forget-password" passHref>
+          <Spacer size={0.5} axis="vertical" />
+          
+          {/* <Link href="/forget-password" passHref>
             <ButtonLink type="success" size="large" variant="ghost">
               Forget password
             </ButtonLink>
+          </Link> */}
+
+          <Link href="/sign-up" passHref>
+            <TextLink className={styles.foottext} color="link" variant="highlight">
+              Don&apos;t have an account? Sign Up
+            </TextLink>
           </Link>
+
         </form>
       </div>
-      <div className={styles.footer}>
-        <Link href="/sign-up" passHref>
-          <TextLink color="link" variant="highlight">
-            Don&apos;t have an account? Sign Up
-          </TextLink>
-        </Link>
-      </div>
+    
     </Wrapper>
   );
 };

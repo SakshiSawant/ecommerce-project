@@ -45,6 +45,7 @@ contract AllCause is ReentrancyGuard {
         bool completed
     );
 
+     
     /// @notice function to get listingprice
     function getListingPrice() public view returns (uint256) {
         return listingPrice;
@@ -83,8 +84,9 @@ contract AllCause is ReentrancyGuard {
             false
         );
 
+ 
         //transfer ownership of the nft to the contract itself
-        IERC721(causeContract).transferFrom(msg.sender, address(this), tokenId);
+        //IERC721(causeContract).transferFrom(msg.sender, address(this), tokenId);
 
         //log this transaction
         emit CauseItemCreated(
@@ -99,14 +101,12 @@ contract AllCause is ReentrancyGuard {
         );
     }
 
+
     /// @notice function to create a sale
-    function createCauseDonate(address causeContract, uint256 causeId, uint256 curramt)
-        public
-        payable
-        nonReentrant
-    {
-        //Need to add a line for custom amount
-        uint256 curramount = curramt;
+    function createCauseDonate(address causeContract, uint256 causeId, uint256 amtt) 
+        public payable nonReentrant {
+        //Need to add a line for custom amount //uint curramt
+        uint256 curramount = amtt;
         uint256 tokenId = idCauseItem[causeId].tokenId;
 
         require(
@@ -119,8 +119,11 @@ contract AllCause is ReentrancyGuard {
         //pay the seller the amount
         idCauseItem[causeId].creator.transfer(msg.value);
 
+
         //transfer ownership of the nft from the contract itself to the buyer
-        IERC721(causeContract).transferFrom(address(this), msg.sender, tokenId);
+        IERC721(causeContract).transferFrom(msg.sender, address(this), tokenId);
+        //IERC20(causeContract).transferFrom(address(this), msg.sender, msg.value);
+        
 
         idCauseItem[causeId].donor = payable(msg.sender); //mark buyer as new owner //No need to change later..
 

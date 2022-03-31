@@ -63,12 +63,35 @@ const SignUp = () => {
   return (
     <Wrapper className={styles.root}>
       <div className={styles.main}>
-        <h1 className={styles.title}>Join Now</h1>
+        <h1 className={styles.title}>Sign Up</h1>
         <form onSubmit={onSubmit}>
-          <Container alignItems="center">
+
+          {/* <Container alignItems="center">
             <p className={styles.subtitle}>Your login</p>
             <div className={styles.seperator} />
-          </Container>
+          </Container> */}
+
+        <Spacer size={0.3} axis="vertical" />
+          <Input
+            ref={nameRef}
+            autoComplete="name"
+            placeholder="Your name"
+            ariaLabel="Your name"
+            size="large"
+            required
+          />
+          <Spacer size={0.5} axis="vertical" />
+
+          <Input
+            ref={usernameRef}
+            autoComplete="username"
+            placeholder="Username"
+            ariaLabel="Username"
+            size="large"
+            required
+          />
+          <Spacer size={0.5} axis="vertical" />
+
           <Input
             ref={emailRef}
             htmlType="email"
@@ -79,6 +102,7 @@ const SignUp = () => {
             required
           />
           <Spacer size={0.5} axis="vertical" />
+
           <Input
             ref={passwordRef}
             htmlType="password"
@@ -88,47 +112,30 @@ const SignUp = () => {
             size="large"
             required
           />
+          <Spacer size={0.5} axis="vertical" />
           
-          <Container alignItems="center">
+          {/* <Container alignItems="center">
             <p className={styles.subtitle}>About you</p>
             <div className={styles.seperator} />
-          </Container>
-          <Input
-            ref={usernameRef}
-            autoComplete="username"
-            placeholder="Username"
-            ariaLabel="Username"
-            size="large"
-            required
-          />
-          <Spacer size={0.5} axis="vertical" />
+          </Container> */}
           
         <div>
           <label>
             <input type="radio" name="accounttype" value="donor" checked={accounttype == 'donor'} onChange={handleChange} />
-            <span>Donor</span>
-            </label>
+            <span> Donor </span>
+          </label>
             
           <label>
             <input type="radio" name="accounttype" value="beneficiary" checked={accounttype == 'beneficiary'} onChange={handleChange} />
-            <span>Beneficiary</span>
+            <span> Beneficiary </span>
           </label>
               
           <label>
             <input type="radio" name="accounttype" value="cooperativeshop" checked={accounttype == 'cooperativeshop'} onChange={handleChange} />
-            <span>Cooperative Shop</span>
+            <span> Cooperative Shop </span>
           </label>
       </div>
-          
-          <Spacer size={0.5} axis="vertical" />
-          <Input
-            ref={nameRef}
-            autoComplete="name"
-            placeholder="Your name"
-            ariaLabel="Your name"
-            size="large"
-            required
-          />
+
           <Spacer size={1} axis="vertical" />
           <Button
             htmlType="submit"
@@ -140,14 +147,14 @@ const SignUp = () => {
             Sign up
           </Button>
         </form>
-      </div>
-      <div className={styles.footer}>
+        <Spacer size={1} axis="vertical"/>
         <Link href="/login" passHref>
-          <TextLink color="link" variant="highlight">
+          <TextLink className={styles.foottext} color="link" variant="highlight">
             Already have an account? Log in
           </TextLink>
         </Link>
       </div>
+      
     </Wrapper>
   );
 };
