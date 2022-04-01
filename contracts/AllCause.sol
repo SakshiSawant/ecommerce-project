@@ -5,7 +5,35 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
+interface IERC20 {
+    function transfer(address, uint256) external returns (bool);
+
+    function approve(address, uint256) external returns (bool);
+
+    function transferFrom(
+        address,
+        address,
+        uint256
+    ) external returns (bool);
+
+    function totalSupply() external view returns (uint256);
+
+    function balanceOf(address) external view returns (uint256);
+
+    function allowance(address, address) external view returns (uint256);
+
+    event Transfer(address indexed from, address indexed to, uint256 value);
+    event Approval(
+        address indexed owner,
+        address indexed spender,
+        uint256 value
+    );
+}
+
 contract AllCause is ReentrancyGuard {
+    address internal cUsdTokenAddress =
+        0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65;
+
     using Counters for Counters.Counter;
     Counters.Counter private _causeIds; //total number of cause ever raised
     Counters.Counter private _causeDone; //total number of cause completed/done
@@ -20,7 +48,7 @@ contract AllCause is ReentrancyGuard {
     }
 
     struct CauseItem {
-        uint256 causeId; 
+        uint256 causeId;
         address causeContract;
         uint256 tokenId;
         address payable creator; //person selling the nft
@@ -69,7 +97,7 @@ contract AllCause is ReentrancyGuard {
             msg.value == listingPrice,
             "Price must be equal to listing price"
         );
-        _causeIds.increment(); //add 1 to the total number of items ever created 
+        _causeIds.increment(); //add 1 to the total number of items ever created
         uint256 causeId = _causeIds.current();
 
         idCauseItem[causeId] = CauseItem(
@@ -84,7 +112,16 @@ contract AllCause is ReentrancyGuard {
         );
 
         //transfer ownership of the nft to the contract itself
-        IERC721(causeContract).transferFrom(msg.sender, address(this), tokenId);
+        // IERC721(causeContract).transferFrom(msg.sender, address(this), tokenId);
+
+        require(
+            IERC20(cUsdTokenAddress).transferFrom(
+                msg.sender,
+                idCauseItem[causeId].creator,
+                goal
+            ),
+            "funding this project has failed."
+        );
 
         //log this transaction
         emit CauseItemCreated(
@@ -100,18 +137,18 @@ contract AllCause is ReentrancyGuard {
     }
 
     /// @notice function to create a sale
-    function createCauseDonate(address causeContract, uint256 causeId, uint256 curramt)
-        public
-        payable
-        nonReentrant
-    {
+    function createCauseDonate(
+        address causeContract,
+        uint256 causeId,
+        uint256 curramt
+    ) public payable nonReentrant {
         //Need to add a line for custom amount
         uint256 curramount = curramt;
         uint256 tokenId = idCauseItem[causeId].tokenId;
 
         require(
             msg.value >= minamount,
-           "Please submit the asking price in order to complete purchase"
+            "Please submit the asking price in order to complete purchase"
         );
 
         msg.value == curramount;
@@ -125,13 +162,12 @@ contract AllCause is ReentrancyGuard {
         idCauseItem[causeId].donor = payable(msg.sender); //mark buyer as new owner //No need to change later..
 
         idCauseItem[causeId].amount += curramount;
-        if(idCauseItem[causeId].amount >= idCauseItem[causeId].goal){
+        if (idCauseItem[causeId].amount >= idCauseItem[causeId].goal) {
             idCauseItem[causeId].completed = true; //mark that it has been sold
             _causeDone.increment(); //increment the total number of Items sold by 1
         }
-        
-        payable(owner).transfer(listingPrice); //pay owner of contract the listing price
 
+        payable(owner).transfer(listingPrice); //pay owner of contract the listing price
     }
 
     /// @notice total number of items unsold on our platform
@@ -151,7 +187,7 @@ contract AllCause is ReentrancyGuard {
             if (idCauseItem[i + 1].donor == address(0)) {
                 //yes, this item has never been sold
                 uint256 currentId = idCauseItem[i + 1].causeId;
-                CauseItem storage currentCause = idCauseItem[currentId];  
+                CauseItem storage currentCause = idCauseItem[currentId];
                 causes[currentIndex] = currentCause;
                 currentIndex += 1;
             }
@@ -212,5 +248,4 @@ contract AllCause is ReentrancyGuard {
         }
         return causes;
     }
-
 }

@@ -1,6 +1,5 @@
 // Page to create a new cause
 
-
 import { useState } from 'react'
 import {ethers } from 'ethers'
 import { create as ipfsHttpClient } from 'ipfs-http-client'
@@ -9,9 +8,7 @@ import Web3Modal from 'web3modal'
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
 
-import { causeaddress, allcausesaddress } from '../config';
-import { crowdfundaddress } from '../config';
-import crowdfund from '../artifacts/contracts/CrowdFund.sol/CrowdFund.json'
+import { causeaddress , allcausesaddress } from '../config';
 import Cause from '../artifacts/contracts/Cause.sol/Cause.json';
 import AllCause from '../artifacts/contracts/AllCause.sol/AllCause.json';
 import { EtherscanProvider } from '@ethersproject/providers'
@@ -71,7 +68,7 @@ export default function CreateCause() {
 
         //sign the transaction
         const signer = provider.getSigner();
-        let contract = new ethers.Contract(crowdfundaddress, crowdfund.abi, signer);
+        let contract = new ethers.Contract(causeaddress, Cause.abi, signer);
         let transaction = await contract.createToken(url);
         let tx = await transaction.wait()
 
