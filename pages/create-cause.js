@@ -6,36 +6,38 @@ import { create as ipfsHttpClient } from 'ipfs-http-client'
 import { useRouter } from 'next/router'
 import Web3Modal from 'web3modal'
 
-const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
+import { crowdfundaddress } from '../config';
+import crowdfund from '../artifacts/contracts/CrowdFund.sol/CrowdFund.json';
 
-import { causeaddress , allcausesaddress } from '../config';
-import Cause from '../artifacts/contracts/Cause.sol/Cause.json';
-import AllCause from '../artifacts/contracts/AllCause.sol/AllCause.json';
+// const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
+// import { causeaddress , allcausesaddress } from '../config';
+// import Cause from '../artifacts/contracts/Cause.sol/Cause.json';
+// import AllCause from '../artifacts/contracts/AllCause.sol/AllCause.json';
 import { EtherscanProvider } from '@ethersproject/providers'
 import Image from 'next/Image'
 
 
 export default function CreateCause() {
-    const [fileUrl, setFileUrl] = useState(null)
+    // const [fileUrl, setFileUrl] = useState(null)
     const [formInput, updateFormInput] = useState({goal: '', name: '', description:''})
     const router = useRouter();
 
-    async function onChange(e) {
-        const file = e.target.files[0]
-        try{ //try uploading the file
-            const added = await client.add(
-                file,
-                {
-                    progress: (prog) => console.log(`received: ${prog}`)
-                }
-            )
-            //file saved in the url path below
-            const url = `https://ipfs.infura.io/ipfs/${added.path}`
-            setFileUrl(url)
-        }catch(e){
-            console.log('Error uploading file: ', e)
-        }
-    }
+    // async function onChange(e) {
+    //     const file = e.target.files[0]
+    //     try{ //try uploading the file
+    //         const added = await client.add(
+    //             file,
+    //             {
+    //                 progress: (prog) => console.log(`received: ${prog}`)
+    //             }
+    //         )
+    //         //file saved in the url path below
+    //         const url = `https://ipfs.infura.io/ipfs/${added.path}`
+    //         setFileUrl(url)
+    //     }catch(e){
+    //         console.log('Error uploading file: ', e)
+    //     }
+    // }
 
     //1. create item (image/video) and upload to ipfs
     async function createCause(){
@@ -68,23 +70,23 @@ export default function CreateCause() {
 
         //sign the transaction
         const signer = provider.getSigner();
-        let contract = new ethers.Contract(causeaddress, Cause.abi, signer);
+        let contract = new ethers.Contract(crowdfundaddress, crowdfund.abi, signer);
         let transaction = await contract.createToken(url);
         let tx = await transaction.wait()
 
         //get the tokenId from the transaction that occured above
         //there events array that is returned, the first item from that event
         //is the event, third item is the token id.
-        console.log('Transaction: ',tx)
-        console.log('Transaction events: ',tx.events[0])
-        let event = tx.events[0]
-        let value = event.args[2]
-        let tokenId = value.toNumber() //we need to convert it a number
+        // console.log('Transaction: ',tx)
+        // console.log('Transaction events: ',tx.events[0])
+        // let event = tx.events[0]
+        // let value = event.args[2]
+        // let tokenId = value.toNumber() //we need to convert it a number
 
         //get a reference to the price entered in the form 
         const goal = ethers.utils.parseUnits(formInput.goal, 'ether')
 
-        contract = new ethers.Contract(allcausesaddress, AllCause.abi, signer);
+        // contract = new ethers.Contract(allcausesaddress, AllCause.abi, signer);
 
         //get the listing price
         let listingPrice = await contract.getListingPrice()

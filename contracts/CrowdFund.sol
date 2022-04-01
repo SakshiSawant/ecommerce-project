@@ -47,8 +47,7 @@ contract CrowdFund {
         bool goalAchieved;
         bool isCampaignOpen;
         bool isExists;
-
-        //mapping(address => uint256) contributions;
+        mapping(address => uint256) contributions;
     }
 
     //stores a Campaign struct for each unique campaign ID.
@@ -92,18 +91,34 @@ contract CrowdFund {
 
         uint256 period = block.timestamp + (_fundingPeriodInDays * 1 days);
 
-        Campaign memory aCampaign = Campaign(
-            payable(msg.sender),
-            _campaignTitle,
-            _campaignDescription,
-            _goalAmount,
-            0,
-            period,
-            false,
-            true,
-            true
-        );
-        campaigns[totalCampaigns] = aCampaign;
+        Campaign storage aCampaign = campaigns[totalCampaigns];
+
+        aCampaign.campaignOwner = payable(msg.sender);
+        aCampaign.campaignTitle = _campaignTitle;
+        aCampaign.campaignDescription = _campaignDescription;
+        aCampaign.goalAmount = _goalAmount;
+        aCampaign.totalAmountFunded = 0;
+        aCampaign.deadline = period;
+        aCampaign.goalAchieved = false;
+        aCampaign.isCampaignOpen = true;
+        aCampaign.isExists = true;
+
+        // ++totalCampaigns;
+
+        // uint256 period = block.timestamp + (_fundingPeriodInDays * 1 days);
+
+        // Campaign memory aCampaign = Campaign(
+        //     payable(msg.sender),
+        //     _campaignTitle,
+        //     _campaignDescription,
+        //     _goalAmount,
+        //     0,
+        //     period,
+        //     false,
+        //     true,
+        //     true
+        // );
+        // campaigns[totalCampaigns] = aCampaign;
     }
 
     function getCampaign(uint256 _index)
