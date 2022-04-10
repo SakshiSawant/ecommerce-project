@@ -11,7 +11,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import React from "react";
-import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Modal, ModalBody, ModalFooter }
+  from "reactstrap";
 
 export default function Home() {
   const [causes, setCauses] = useState([]);
