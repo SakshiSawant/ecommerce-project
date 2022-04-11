@@ -22,34 +22,34 @@ function MyApp({ Component, pageProps }) {
     {/* <span class="font-semibold text-xl tracking-tight">Helping Hands</span> */}
   </div>
  
-  <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-    <div class="text-sm lg:flex-grow">
-      <a href="/" class="block mt-4 lg:inline-block text-lg lg:mt-0 text-white hover:text-white mr-4">
+  <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+    <div className="text-sm lg:flex-grow">
+      <a href="/" className="block mt-4 lg:inline-block text-lg lg:mt-0 text-white hover:text-white mr-4">
         Home
       </a>
-      <a href="/create-item" class="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+      <a href="/create-item" className="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
         Create Item
       </a>
-      <a href="/my-assets" class="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+      <a href="/my-assets" className="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
         MyItem
       </a>
-      <a href="/create-cause" class="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+      <a href="/create-cause" className="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
         Create Cause
       </a>
-      <a href="/allcause" class="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+      <a href="/allcause" className="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
         All Cause
       </a>
 
 
-      <a href="/creator-dashboard" class="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+      <a href="/creator-dashboard" className="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
         Dashboard
       </a>
-      <a href="/transaction" class="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+      <a href="/transaction" className="block mt-4 text-lg lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
         My Transactions
       </a>
     </div>
     <div>
-      <a href="/login" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Sign In</a>
+      <a href="/login" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Sign In</a>
     </div>
   </div>
 </nav>

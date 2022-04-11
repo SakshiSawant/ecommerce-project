@@ -90,7 +90,6 @@ export default function Home() {
     <h1 className="px-20 py-10 text-3xl">No Causes Available!</h1>
   )
 
-  const [modalOpen, setModalOpen] = React.useState(false);
 
   return (
     <div className="flex justify-center">
