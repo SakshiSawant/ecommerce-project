@@ -19,7 +19,6 @@
   "bugs": {
     "url": "https://github.com/hoangvvo/nextjs-mongodb-app/issues"
   },
-  "homepage": "https://github.com/hoangvvo/nextjs-mongodb-app#readme",
   "dependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.4",
     "@nomiclabs/hardhat-waffle": "^2.0.2",
